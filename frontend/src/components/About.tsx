@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { motion } from "framer-motion";
 import { Code2, Users, Layers, Zap } from "lucide-react";
 
@@ -51,40 +50,10 @@ export default function About() {
           <div className="w-20 h-1 mx-auto rounded-full" style={{ background: "linear-gradient(90deg, #3b82f6, #06b6d4)" }} />
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-12 lg:gap-16 items-center">
-          <motion.div
-            initial={{ opacity: 0, x: -40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <div className="relative">
-              <motion.div
-                className="absolute inset-0 rounded-2xl blur-2xl opacity-40"
-                style={{ background: "linear-gradient(135deg, #3b82f6, #06b6d4)" }}
-                animate={{ scale: [1, 1.05, 1] }}
-                transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-              />
-              <div
-                className="relative w-64 h-64 sm:w-80 sm:h-80 mx-auto rounded-2xl overflow-hidden"
-                style={{
-                  border: "1px solid rgba(59,130,246,0.3)",
-                  boxShadow: "0 0 40px rgba(59,130,246,0.15)",
-                }}
-              >
-                <Image
-                  src="/image/about.png"
-                  alt="Aditya Gupta"
-                  width={320}
-                  height={320}
-                  className="w-full h-full object-cover"
-                />
-              </div>
-            </div>
-          </motion.div>
+        <div className="max-w-3xl mx-auto">
 
           <motion.div
-            initial={{ opacity: 0, x: 40 }}
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.15 }}
