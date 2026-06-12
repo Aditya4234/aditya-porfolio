@@ -68,7 +68,7 @@ export default function Hero() {
     <section
       id="home"
       className="relative min-h-screen flex items-center overflow-hidden"
-      style={{ background: "#050505" }}
+      style={{ background: "#050505", scrollMarginTop: "5rem" }}
     >
       <Particles />
 

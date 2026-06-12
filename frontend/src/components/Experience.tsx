@@ -29,7 +29,7 @@ const experiences = [
 
 export default function Experience() {
   return (
-    <section id="experience" className="relative py-24 overflow-hidden" style={{ background: "#050505" }}>
+    <section id="experience" className="relative py-24 overflow-hidden" style={{ background: "#050505", scrollMarginTop: "5rem" }}>
       <div className="absolute inset-0 overflow-hidden">
         <motion.div
           className="absolute -bottom-1/3 -right-1/4 w-[450px] h-[450px] rounded-full opacity-10"

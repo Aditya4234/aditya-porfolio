@@ -34,7 +34,7 @@ const skillCategories = [
 
 export default function Skills() {
   return (
-    <section id="skills" className="relative py-24 overflow-hidden" style={{ background: "#050505" }}>
+    <section id="skills" className="relative py-24 overflow-hidden" style={{ background: "#050505", scrollMarginTop: "5rem" }}>
       <div className="absolute inset-0 overflow-hidden">
         <motion.div
           className="absolute top-1/2 -left-1/4 w-[450px] h-[450px] rounded-full opacity-10"

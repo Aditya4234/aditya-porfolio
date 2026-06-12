@@ -7,17 +7,40 @@ import { Mail, MapPin, Send, Loader2 } from "lucide-react";
 export default function Contact() {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
-    await new Promise((r) => setTimeout(r, 1000));
-    setLoading(false);
-    setSubmitted(true);
+    setError("");
+
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+    formData.append("access_key", "bcf880b7-87f5-4211-948c-6a630b652b6f");
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData,
+      });
+
+      const data = await response.json();
+      setLoading(false);
+
+      if (data.success) {
+        setSubmitted(true);
+        form.reset();
+      } else {
+        setError(data.message || "Something went wrong. Please try again.");
+      }
+    } catch {
+      setLoading(false);
+      setError("Network error. Please check your connection.");
+    }
   };
 
   return (
-    <section id="contact" className="relative py-24 overflow-hidden" style={{ background: "#050505" }}>
+    <section id="contact" className="relative py-24 overflow-hidden" style={{ background: "#050505", scrollMarginTop: "5rem" }}>
       <div className="absolute inset-0 overflow-hidden">
         <motion.div
           className="absolute top-1/4 -right-1/4 w-[500px] h-[500px] rounded-full opacity-10"
@@ -93,6 +116,7 @@ export default function Contact() {
                   <input
                     type="text"
                     id="name"
+                    name="name"
                     required
                     placeholder="John Doe"
                     className="w-full px-4 py-3 rounded-xl text-sm transition-colors placeholder:opacity-50"
@@ -112,6 +136,7 @@ export default function Contact() {
                   <input
                     type="email"
                     id="email"
+                    name="email"
                     required
                     placeholder="john@example.com"
                     className="w-full px-4 py-3 rounded-xl text-sm transition-colors placeholder:opacity-50"
@@ -129,40 +154,45 @@ export default function Contact() {
                 <label htmlFor="subject" className="block text-sm font-medium mb-2" style={{ color: "#94a3b8" }}>
                   Subject <span style={{ color: "#ef4444" }}>*</span>
                 </label>
-                <input
-                  type="text"
-                  id="subject"
-                  required
-                  placeholder="Project Discussion"
-                  className="w-full px-4 py-3 rounded-xl text-sm transition-colors placeholder:opacity-50"
-                  style={{
-                    background: "rgba(255,255,255,0.05)",
-                    border: "1px solid rgba(59,130,246,0.15)",
-                    color: "#e2e8f0",
-                  }}
-                  onFocus={(e) => e.currentTarget.style.borderColor = "#3b82f6"}
-                  onBlur={(e) => e.currentTarget.style.borderColor = "rgba(59,130,246,0.15)"}
-                />
+              <input
+                    type="text"
+                    id="subject"
+                    name="subject"
+                    required
+                    placeholder="Project Discussion"
+                    className="w-full px-4 py-3 rounded-xl text-sm transition-colors placeholder:opacity-50"
+                    style={{
+                      background: "rgba(255,255,255,0.05)",
+                      border: "1px solid rgba(59,130,246,0.15)",
+                      color: "#e2e8f0",
+                    }}
+                    onFocus={(e) => e.currentTarget.style.borderColor = "#3b82f6"}
+                    onBlur={(e) => e.currentTarget.style.borderColor = "rgba(59,130,246,0.15)"}
+                  />
+                </div>
+                <div>
+                  <label htmlFor="message" className="block text-sm font-medium mb-2" style={{ color: "#94a3b8" }}>
+                    Message <span style={{ color: "#ef4444" }}>*</span>
+                  </label>
+                  <textarea
+                    id="message"
+                    name="message"
+                    rows={5}
+                    required
+                    placeholder="Tell me about your project..."
+                    className="w-full px-4 py-3 rounded-xl text-sm transition-colors placeholder:opacity-50 resize-none"
+                    style={{
+                      background: "rgba(255,255,255,0.05)",
+                      border: "1px solid rgba(59,130,246,0.15)",
+                      color: "#e2e8f0",
+                    }}
+                    onFocus={(e) => e.currentTarget.style.borderColor = "#3b82f6"}
+                    onBlur={(e) => e.currentTarget.style.borderColor = "rgba(59,130,246,0.15)"}
+                  />
               </div>
-              <div>
-                <label htmlFor="message" className="block text-sm font-medium mb-2" style={{ color: "#94a3b8" }}>
-                  Message <span style={{ color: "#ef4444" }}>*</span>
-                </label>
-                <textarea
-                  id="message"
-                  rows={5}
-                  required
-                  placeholder="Tell me about your project..."
-                  className="w-full px-4 py-3 rounded-xl text-sm transition-colors placeholder:opacity-50 resize-none"
-                  style={{
-                    background: "rgba(255,255,255,0.05)",
-                    border: "1px solid rgba(59,130,246,0.15)",
-                    color: "#e2e8f0",
-                  }}
-                  onFocus={(e) => e.currentTarget.style.borderColor = "#3b82f6"}
-                  onBlur={(e) => e.currentTarget.style.borderColor = "rgba(59,130,246,0.15)"}
-                />
-              </div>
+              {error && (
+                <p className="text-sm text-center" style={{ color: "#ef4444" }}>{error}</p>
+              )}
               <button
                 type="submit"
                 disabled={loading}

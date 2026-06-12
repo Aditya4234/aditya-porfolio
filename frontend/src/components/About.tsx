@@ -12,7 +12,7 @@ const stats = [
 
 export default function About() {
   return (
-    <section id="about" className="relative py-24 overflow-hidden" style={{ background: "#050505" }}>
+    <section id="about" className="relative py-24 overflow-hidden" style={{ background: "#050505", scrollMarginTop: "5rem" }}>
       <div className="absolute inset-0 overflow-hidden">
         <motion.div
           className="absolute top-1/3 -right-1/4 w-[400px] h-[400px] rounded-full opacity-10"
