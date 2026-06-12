@@ -45,7 +45,7 @@ const jsonLd = {
   jobTitle: "Full Stack Developer",
   description:
     "Full Stack Developer specializing in building modern, scalable web applications.",
-  sameAs: ["https://github.com", "https://linkedin.com", "https://twitter.com"],
+  sameAs: ["https://github.com", "https://linkedin.com", "https://x.com/AdityaG8476653"],
 };
 
 export default function RootLayout({
